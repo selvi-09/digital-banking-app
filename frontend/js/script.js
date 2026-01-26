@@ -1,0 +1,27 @@
+function login() {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  fetch("http://localhost:7000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+
+    if (data.message === "Login successful") {
+      window.location.href = "dashboard.html";
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Server error");
+  });
+}
